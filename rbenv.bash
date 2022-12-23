@@ -23,7 +23,7 @@ provision:rbenv:yard:gems() {
 provision:rbenv:full() {
 	provision:rbenv:version
 	provision:rbenv:gemset
-	provision:rbenv:yard_gems
+	provision:rbenv:yard:gems
 }
 
 direnv:auto:rbenv() {
