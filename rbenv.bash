@@ -6,7 +6,7 @@
 provision:resolve:ruby:version() {
 	if [ -f .ruby-version ];
 	then
-		__rbenv_ruby_version=%(cat .ruby-version)
+		__rbenv_ruby_version=$(cat .ruby-version)
 	else
 		__rbenv_ruby_version="2.7.5"
 	fi
@@ -15,7 +15,7 @@ provision:resolve:ruby:version() {
 provision:resolve:ruby:gemset() {
 	if [ -f .ruby-gemset ];
 	then
-		__rbenv_ruby_gemset=%(cat .ruby-version)
+		__rbenv_ruby_gemset=$(cat .ruby-version)
 	else
 		__rbenv_ruby_gemset="default_provisioner_gemset_name"
 	fi
