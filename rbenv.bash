@@ -33,8 +33,24 @@ provision:resolve:globals() {
 	export __rbenv_yard_doc="$__rbenv_gemset/doc"
 }
 
-provision:common() {
+provision:disolve:globals() {
+	unset __rbenv_ruby_version
+	unset __rbenv_ruby_gemset
+	unset __rbenv_home
+	unset __rbenv_versions
+	unset __rbenv_bin
+	unset __rbenv_gemsets
+	unset __rbenv_gemset
+	unset __rbenv_yard
+	unset __rbenv_yard_doc
+}
+
+provision:before() {
 	provision:resolve:globals
+}
+
+provision:after() {
+	provision:disolve:globals
 }
 
 provision:rbenv:version() {
@@ -56,10 +72,11 @@ provision:rbenv:yard:gems() {
 }
 
 provision:rbenv:full() {
-	provision:common
+	provision:before
 	provision:rbenv:version
 	provision:rbenv:gemset
 	provision:rbenv:yard:gems
+	provision:after
 }
 
 direnv:auto:rbenv() {
