@@ -2,32 +2,32 @@
 # rbenv helper functions
 ################################################################################
 
-provision_rbenv_version() {
+provision:rbenv:version() {
 	if [ -f ~/.rbenv/bin/rbenv ]; then
 		! [ -d "$HOME/.rbenv/versions/$(cat .ruby-version)" ] && rbenv install
 	fi
 }
 
-provision_rbenv_gemset() {
+provision:rbenv:gemset() {
 	if [ -f Gemfile ]; then
 		! [ -d "$HOME/.rbenv/versions/$(cat .ruby-version)/gemsets/$(cat .ruby-gemset)" ] && gem install bundler && bundle
 	fi
 }
 
-provision_rbenv_yard_gems() {
+provision:rbenv:yard:gems() {
 	if [ -f "$HOME/.rbenv/versions/$(cat .ruby-version)/gemsets/$(cat .ruby-gemset)/bin/yard" ]; then
 		! [ -d "$HOME/.rbenv/versions/$(cat .ruby-version)/gemsets/$(cat .ruby-gemset)/doc" ] && yard gems
 	fi
 }
 
-provision_rbenv_full() {
-	provision_rbenv_version
-	provision_rbenv_gemset
-	provision_rbenv_yard_gems
+provision:rbenv:full() {
+	provision:rbenv:version
+	provision:rbenv:gemset
+	provision:rbenv:yard_gems
 }
 
-direnv_auto_rbenv() {
-	provision_rbenv_full
+direnv:auto:rbenv() {
+	provision:rbenv:full
 }
 
 ############################################################################## @
