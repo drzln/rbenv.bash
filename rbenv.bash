@@ -15,7 +15,7 @@ provision:resolve:ruby:version() {
 provision:resolve:ruby:gemset() {
 	if [ -f .ruby-gemset ];
 	then
-		__rbenv_ruby_gemset=$(cat .ruby-version)
+		__rbenv_ruby_gemset=$(cat .ruby-gemset)
 	else
 		__rbenv_ruby_gemset="default_provisioner_gemset_name"
 	fi
