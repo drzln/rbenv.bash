@@ -2,10 +2,32 @@
 # rbenv helper functions
 ################################################################################
 
+provision:write:default:ruby:version() {
+	RUBY_VERSION_PATH="1:-.ruby-version"
+	RUBY_VERSION="2:-2.7.5"
+
+	if ! [ -f $RUBY_VERSION_PATH ]; then
+		echo $RUBY_VERSION > $RUBY_VERSION_PATH
+	fi
+
+	unset RUBY_VERSION_PATH
+	unset RUBY_VERSION
+}
+
+provision:write:default:ruby:gemset() {
+	RUBY_GEMSET_PATH="1:-.ruby-gemset"
+	RUBY_GEMSET_NAME="2:-default_provisioner_gemset_name"
+
+	if ! [ -f $RUBY_GEMSET_PATH ]; then
+		echo $RUBY_GEMSET_NAME > $RUBY_GEMSET_PATH
+	fi
+
+	unset RUBY_GEMSET_PATH
+	unset RUBY_GEMSET_NAME
+}
 
 provision:resolve:ruby:version() {
-	if [ -f .ruby-version ];
-	then
+	if [ -f .ruby-version ]; then
 		__rbenv_ruby_version=$(cat .ruby-version)
 	else
 		__rbenv_ruby_version="2.7.5"
@@ -13,8 +35,7 @@ provision:resolve:ruby:version() {
 }
 
 provision:resolve:ruby:gemset() {
-	if [ -f .ruby-gemset ];
-	then
+	if [ -f .ruby-gemset ]; then
 		__rbenv_ruby_gemset=$(cat .ruby-gemset)
 	else
 		__rbenv_ruby_gemset="default_provisioner_gemset_name"
@@ -46,6 +67,8 @@ provision:disolve:globals() {
 }
 
 provision:before() {
+	provision:write:default:ruby:version
+	provision:write:default:ruby:gemset
 	provision:resolve:globals
 }
 
