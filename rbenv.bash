@@ -3,8 +3,8 @@
 ################################################################################
 
 provision:write:default:ruby:version() {
-	RUBY_VERSION_PATH="1:-.ruby-version"
-	RUBY_VERSION="2:-2.7.5"
+	RUBY_VERSION_PATH="${1:-.ruby-version}"
+	RUBY_VERSION="${2:-2.7.5}"
 
 	if ! [ -f $RUBY_VERSION_PATH ]; then
 		echo $RUBY_VERSION > $RUBY_VERSION_PATH
@@ -15,8 +15,8 @@ provision:write:default:ruby:version() {
 }
 
 provision:write:default:ruby:gemset() {
-	RUBY_GEMSET_PATH="1:-.ruby-gemset"
-	RUBY_GEMSET_NAME="2:-default_provisioner_gemset_name"
+	RUBY_GEMSET_PATH="${1:-.ruby-gemset}"
+	RUBY_GEMSET_NAME="${2:-default_provisioner_gemset_name}"
 
 	if ! [ -f $RUBY_GEMSET_PATH ]; then
 		echo $RUBY_GEMSET_NAME > $RUBY_GEMSET_PATH
